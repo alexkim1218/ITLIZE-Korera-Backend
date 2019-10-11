@@ -6,5 +6,7 @@ public class Project {
 	
 	@Id
 	private int Pid;
+	
+	private String name;
 
 }
