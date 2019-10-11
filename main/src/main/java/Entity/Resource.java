@@ -1,9 +1,13 @@
 package Entity;
+import org.springframework.data.annotation.Id;
 
 public class Resource {
-	@org.springframework.data.annotation.Id
+	
+	@Id
 	private int Id;
+	
 	private String resourceName;
+	
 	private  int resourceCode;
 
 }
