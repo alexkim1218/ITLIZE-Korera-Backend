@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class MainApplication {
 
 	public static void main(String[] args) {
-//		test slack 2
 		SpringApplication.run(MainApplication.class, args);
 	}
 
