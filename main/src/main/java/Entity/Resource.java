@@ -22,6 +22,15 @@ public class Resource {
 	
 	@Column
 	private int resourceCode;
+	
+	@Column
+	private String extraCols;
+
+	@Column
+	private String extraColsType;
+	
+	@Column
+	private String extraColsVal;
 
 	public int getResourceID() {
 		return resourceID;
@@ -45,6 +54,30 @@ public class Resource {
 
 	public void setResourceCode(int resourceCode) {
 		this.resourceCode = resourceCode;
+	}
+	
+	public String getExtraCols() {
+		return extraCols;
+	}
+
+	public void setExtraCols(String extraCols) {
+		this.extraCols = extraCols;
+	}
+
+	public String getExtraColsType() {
+		return extraColsType;
+	}
+
+	public void setExtraColsType(String extraColsType) {
+		this.extraColsType = extraColsType;
+	}
+
+	public String getExtraColsVal() {
+		return extraColsVal;
+	}
+
+	public void setExtraColsVal(String extraColsVal) {
+		this.extraColsVal = extraColsVal;
 	}
 	
 	@Override
