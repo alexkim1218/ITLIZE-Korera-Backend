@@ -2,13 +2,10 @@ package Entity;
 
 import org.springframework.data.annotation.Id;
 
-public class Project {
+public class User {
 	
 	@Id
-	private int Pid;
 	
-	private String name;
-	
-	
+	private int userId; 
 
 }
