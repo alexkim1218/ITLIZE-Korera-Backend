@@ -1,8 +1,8 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    username: SDXuuxoywJ
-    password: QgQ2RIKa7a
-    url: jdbc:mysql://remotemysql.com:3306/SDXuuxoywJ?useSSL=false
-  jpa:
-    show-sql: true
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      username: SDXuuxoywJ
+      password: QgQ2RIKa7a
+      url: jdbc:mysql://remotemysql.com:3306/SDXuuxoywJ?useSSL=false
+   jpa:
+      show-sql: true
