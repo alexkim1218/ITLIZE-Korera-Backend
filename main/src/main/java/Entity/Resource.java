@@ -1,13 +1,14 @@
 package Entity;
 import org.springframework.data.annotation.Id;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "Resource")
@@ -22,6 +23,26 @@ public class Resource {
 	
 	@Column
 	private int resourceCode;
+	
+	@Column
+	private String extraCols;
+
+	@Column
+	private String extraColsType;
+	
+	@Column
+	private String extraColsVal;
+	
+	@ManyToMany(mappedBy = "listResources")
+	List<Project> listProject;
+
+	public List<Project> getListProject() {
+		return listProject;
+	}
+
+	public void setListProject(List<Project> listProject) {
+		this.listProject = listProject;
+	}
 
 	public int getResourceID() {
 		return resourceID;
@@ -45,6 +66,30 @@ public class Resource {
 
 	public void setResourceCode(int resourceCode) {
 		this.resourceCode = resourceCode;
+	}
+	
+	public String getExtraCols() {
+		return extraCols;
+	}
+
+	public void setExtraCols(String extraCols) {
+		this.extraCols = extraCols;
+	}
+
+	public String getExtraColsType() {
+		return extraColsType;
+	}
+
+	public void setExtraColsType(String extraColsType) {
+		this.extraColsType = extraColsType;
+	}
+
+	public String getExtraColsVal() {
+		return extraColsVal;
+	}
+
+	public void setExtraColsVal(String extraColsVal) {
+		this.extraColsVal = extraColsVal;
 	}
 	
 	@Override

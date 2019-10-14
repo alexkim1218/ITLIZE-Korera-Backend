@@ -1,11 +1,15 @@
 package Entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
+import javax.persistence.JoinColumn;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -19,6 +23,22 @@ public class Project {
 	@Column
 	private String projectName;
 	
+	@ManyToMany
+	@JoinTable(
+	  name = "Project_Resource", 
+	  joinColumns = @JoinColumn(name = "pid"), 
+	  inverseJoinColumns = @JoinColumn(name = "rid"))
+	
+	List<Resource> listResources;
+	
+	public List<Resource> getListResources() {
+		return listResources;
+	}
+
+	public void setListResources(List<Resource> listResources) {
+		this.listResources = listResources;
+	}
+
 	public int getProjectID() {
 		return projectID;
 	}
