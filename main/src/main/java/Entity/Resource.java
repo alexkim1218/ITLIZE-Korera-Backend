@@ -1,4 +1,5 @@
 package Entity;
+import org.springframework.data.annotation.Id;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import org.springframework.data.annotation.Id;
 @Entity
 @Table(name = "Resource")
 public class Resource {
+  
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int resourceID;
