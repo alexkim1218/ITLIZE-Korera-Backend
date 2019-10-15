@@ -4,7 +4,6 @@ import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.context.support.BeanDefinitionDsl.Role;
@@ -14,16 +13,15 @@ public class User {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long user_id;
 
+	@NaturalId
+	@NotBlank
+	private String username;
+
 	@NotBlank
 	private String first_name;
 
 	@NotBlank
 	private String last_name;
-
-	@NaturalId
-	@NotBlank
-	@Email
-	private String email;
 
 	@NotBlank
 	private String password;
@@ -32,10 +30,10 @@ public class User {
 
 	public User() {}
 
-	public User (String first_name, String last_name, String email, String password) {
+	public User (String username, String first_name, String last_name, String password) {
+		this.username = username;
 		this.first_name = first_name;
 		this.last_name = last_name;
-		this.email = email;
 		this.password = password;
 	}
 
@@ -45,6 +43,14 @@ public class User {
 
 	public void setId (Long ser_id) {
 		this.user_id = ser_id;
+	}
+
+	public String getUsername () {
+		return username;
+	}
+
+	public void setUsername (String username) {
+		this.username = username;
 	}
 
 	public String getFirst_name () {
@@ -61,14 +67,6 @@ public class User {
 
 	public void setLast_name (String last_name) {
 		this.last_name = last_name;
-	}
-
-	public String getEmail () {
-		return email;
-	}
-
-	public void setEmail (String email) {
-		this.email = email;
 	}
 
 	public String getPassword () {
