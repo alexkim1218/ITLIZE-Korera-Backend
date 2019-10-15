@@ -1,4 +1,4 @@
-package com.korera.main;
+package Entity;
 
 import java.util.Set;
 import javax.persistence.GeneratedValue;
