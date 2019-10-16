@@ -1,39 +1,59 @@
 package Entity;
 
-import java.util.Set;
+import java.sql.Date;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import org.hibernate.annotations.NaturalId;
-import org.springframework.context.support.BeanDefinitionDsl.Role;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "User")
 
 public class User {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long userID;
+	private int userID;
 
-	@NaturalId
-	@NotBlank
+	@Column
 	private String username;
 
-	@NotBlank
+	@Column
 	private String password;
 
-	@NotBlank
-	private String name;
+	@Column
+	private String firstName;
 
-	// TODO: CREATE MANY-TO-MANY TABLE
+	@Column
+	private String lastName;
 
-	public User() {}
+	@Column
+	private String title;	
 
-	public User (String username, String password, String name) {
+	@Column
+	private Date regDate;	
+
+	@ManyToMany (fetch = FetchType.LAZY)
+	@JoinTable (name = "Project_User", 
+	joinColumns = @JoinColumn (name = "userID"), 
+	inverseJoinColumns = @JoinColumn (name = "projectID"))
+	private List<Project> listProjects;
+
+	public User (String username, String password, String firstName, String lastName, String title) {
 		this.username = username;
 		this.password = password;
-		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.title = title;
 	}
 
-	public Long getID () {
+	public int getID () {
 		return userID;
 	}
 
@@ -46,12 +66,18 @@ public class User {
 	}
 
 	public String getName () {
-		return name;
+		return firstName + " " + lastName;
 	}
 
-	public Set<Role> getTitle() {
-		// TODO: CHANGE RETURN VALUE AFTER CREATING TABLE
-		return null;
-		// return roles;
+	public String getTitle () {
+		return title;
+	}
+
+	public Date getRegDate () {
+		return regDate;
+	}
+
+	public List<Project> getProjects () {
+		return listProjects;
 	}
 }
