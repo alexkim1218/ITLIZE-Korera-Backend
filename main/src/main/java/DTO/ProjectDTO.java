@@ -42,6 +42,8 @@ public class ProjectDTO {
         public void setProjectResourceList(List<Resource> projectResourceList) {
             this.projectResourceList = projectResourceList;
         }
+
+
     }
 
 }

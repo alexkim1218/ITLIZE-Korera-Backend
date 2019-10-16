@@ -10,12 +10,14 @@ import java.util.List;
 public interface ProjectService {
       ProjectDTO getDefaultProjectByUserID(Integer userId);
 
-      Page<Resource> getResourcesbyPid(Integer pId, Pageable pageable);
-      List<Resource>  setResouresbyPid(Integer pId);
+      Page<Resource> getResourcesbyPid(Integer pid, Pageable pageable);
+      void setResouresbyPid(Integer pid, List<Resource> listResource );
 
-      List<ProjectDTO> getProjectsByUid(Integer uId);
+      Page<ProjectDTO> getProjectsByUid(Integer uId,Pageable pageable);
 
       void addColumn (Integer pId, String colName, String colType);
+
+      void addRow(Integer pId, Resource resource);
 
 
 
