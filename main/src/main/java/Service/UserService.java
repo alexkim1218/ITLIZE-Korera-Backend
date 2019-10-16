@@ -3,7 +3,9 @@ package Service;
 import Entity.User;
 
 public interface UserService {
-    User getUserbyUserName(String userName);
+    User getUserByCredentials(String username, String password);
 
     User createUser(User user);
+
+
 }
