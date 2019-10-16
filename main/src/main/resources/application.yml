@@ -6,3 +6,6 @@ spring:
       url: jdbc:mysql://remotemysql.com:3306/SDXuuxoywJ?useSSL=false
    jpa:
       show-sql: true
+server:
+   servlet:
+      context-path: /Korera
