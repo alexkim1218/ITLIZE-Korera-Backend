@@ -1,98 +1,82 @@
 package Entity;
 
-
-import org.springframework.data.annotation.Id;
-
-
-
-import java.util.Set;
+import java.sql.Date;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import org.hibernate.annotations.NaturalId;
-import org.springframework.context.support.BeanDefinitionDsl.Role;
-
+@Entity
+@Table (name = "User")
 public class User {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long user_id;
+	private int userID;
 
-	@NotBlank
-	private String first_name;
+	@Column
+	private String username;
 
-	@NotBlank
-	private String last_name;
-
-	@NaturalId
-	@NotBlank
-	@Email
-	private String email;
-
-	@NotBlank
+	@Column
 	private String password;
 
-	// TODO: CREATE MANY-TO-MANY TABLE
+	@Column
+	private String firstName;
 
-	public User() {}
+	@Column
+	private String lastName;
 
-	public User (String first_name, String last_name, String email, String password) {
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.email = email;
+	@Column
+	private String title;	
+
+	@Column
+	private Date regDate;	
+
+	@ManyToMany (fetch = FetchType.LAZY)
+	@JoinTable (name = "Project_User", 
+	joinColumns = @JoinColumn (name = "userID"), 
+	inverseJoinColumns = @JoinColumn (name = "projectID"))
+	private List<Project> listProjects;
+
+	public User (String username, String password, String firstName, String lastName, String title) {
+		this.username = username;
 		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.title = title;
 	}
 
-	public Long getId () {
-		return user_id;
+	public int getID () {
+		return userID;
 	}
 
-	public void setId (Long ser_id) {
-		this.user_id = ser_id;
-	}
-
-	public String getFirst_name () {
-		return first_name;
-	}
-
-	public void setFirst_name (String first_name) {
-		this.first_name = first_name;
-	}
-
-	public String getLast_name () {
-		return last_name;
-	}
-
-	public void setLast_name (String last_name) {
-		this.last_name = last_name;
-	}
-
-	public String getEmail () {
-		return email;
-	}
-
-	public void setEmail (String email) {
-		this.email = email;
+	public String getUsername () {
+		return username;
 	}
 
 	public String getPassword () {
 		return password;
 	}
 
-	public void setPassword (String password) {
-		this.password = password;
+	public String getName () {
+		return firstName + " " + lastName;
 	}
 
-	public Set<Role> getRoles() {
-		// TODO: CHANGE RETURN VALUE AFTER CREATING TABLE
-		return null;
-		// return roles;
+	public String getTitle () {
+		return title;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		// TODO: ADD RETURN VALUE AFTER CREATING TABLE
-		// this.roles = roles;
+	public Date getRegDate () {
+		return regDate;
 	}
 
+	public List<Project> getProjects () {
+		return listProjects;
+	}
 }
