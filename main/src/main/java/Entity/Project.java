@@ -34,15 +34,8 @@ public class Project {
 	
 	
 
-	List<Resource> listResources;
-	
-	public List<Resource> getListResources() {
-		return listResources;
-	}
 
-	public void setListResources(List<Resource> listResources) {
-		this.listResources = listResources;
-	}
+
 
 
 	public int getProjectID() {

@@ -1,5 +1,5 @@
 package Service;
 
-public class ProjectService {
+public interface ProjectService {
 
 }
