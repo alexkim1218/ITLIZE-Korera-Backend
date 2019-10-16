@@ -1,9 +1,14 @@
 package Entity;
 
+
+import org.springframework.data.annotation.Id;
+
+
+
 import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.NaturalId;
@@ -89,4 +94,5 @@ public class User {
 		// TODO: ADD RETURN VALUE AFTER CREATING TABLE
 		// this.roles = roles;
 	}
+
 }

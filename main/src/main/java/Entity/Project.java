@@ -29,15 +29,15 @@ public class Project {
 	  joinColumns = @JoinColumn(name = "pid"), 
 	  inverseJoinColumns = @JoinColumn(name = "rid"))
 	
-	List<Resource> listResources;
-	
-	public List<Resource> getListResources() {
-		return listResources;
-	}
 
-	public void setListResources(List<Resource> listResources) {
-		this.listResources = listResources;
-	}
+	private String name;
+
+	
+	
+
+
+
+
 
 	public int getProjectID() {
 		return projectID;
