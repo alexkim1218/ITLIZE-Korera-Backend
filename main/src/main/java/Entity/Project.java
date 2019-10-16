@@ -23,37 +23,56 @@ public class Project {
 	@Column
 	private String projectName;
 	
+	@Column
+	private String extraCols;
+	
+	@Column
+	private String extraColsType;
+	
 	@ManyToMany
 	@JoinTable(
 	  name = "Project_Resource", 
 	  joinColumns = @JoinColumn(name = "pid"), 
 	  inverseJoinColumns = @JoinColumn(name = "rid"))
-	
-
-	private String name;
-
-	
-	
-
-
-
-
-
+	private List<Resource> listResources;
+ 
 	public int getProjectID() {
 		return projectID;
-	}
-
-	public void setProjectID(int projectID) {
-		this.projectID = projectID;
 	}
 
 	public String getProjectName() {
 		return projectName;
 	}
 
-	public void setProjectName(String projectName) {
+	public boolean setProjectName(String projectName) {
 		this.projectName = projectName;
+		return true;
 	}
+	
+	public String getExtraCols() {
+		return extraCols;
+	}
+
+	public void setExtraCols(String extraCols) {
+		this.extraCols = extraCols;
+	}
+
+	public String getExtraColsType() {
+		return extraColsType;
+	}
+
+	public void setExtraColsType(String extraColsType) {
+		this.extraColsType = extraColsType;
+	}
+
+	public List<Resource> getResources() {
+		return listResources;
+	}
+
+	public void setResources(List<Resource> listResources) {
+		this.listResources = listResources;
+	}
+	
 	
 	@Override
 	public String toString() {
