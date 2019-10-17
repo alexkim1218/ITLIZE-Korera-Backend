@@ -1,11 +1,12 @@
 package Service;
 
 import Entity.Resource;
-import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 public interface ResourceService {
 
-    Page<Resource> getAllResources();
+    List<Resource> getAllResources();
 
     void editResourceByRid(int rid,Resource resource);
 }
