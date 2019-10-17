@@ -50,6 +50,10 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.title = title;
+		
+		//get the current date
+		long millis = System.currentTimeMillis();  
+        this.regDate = new java.sql.Date(millis);
 	}
 
 	public int getID () {
