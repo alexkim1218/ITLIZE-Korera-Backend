@@ -1,4 +1,4 @@
-package com.korera.main.Service;
+package com.korera.main.Service.Impl;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import com.korera.main.DAO.ProjectDAO;
 import com.korera.main.DTO.ProjectDTO;
 import com.korera.main.Entity.Project;
 import com.korera.main.Entity.Resource;
+import com.korera.main.Service.ProjectService;
 
 @Service
 public class ProjectServiceImp implements ProjectService {
