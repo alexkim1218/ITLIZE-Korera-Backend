@@ -1,6 +1,6 @@
-package Service;
+package com.korera.main.Service;
 
-import Entity.Resource;
+import com.korera.main.Entity.Resource;
 import org.springframework.data.domain.Page;
 
 public interface ResourceService {

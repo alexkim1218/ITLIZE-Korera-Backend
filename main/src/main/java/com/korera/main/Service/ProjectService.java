@@ -1,12 +1,15 @@
-package Service;
+package com.korera.main.Service;
 
-import DTO.ProjectDTO;
-import Entity.Resource;
+import com.korera.main.DTO.ProjectDTO;
+import com.korera.main.Entity.Project;
+import com.korera.main.Entity.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface ProjectService {
       ProjectDTO getDefaultProjectByUserID(Integer userId);
 
@@ -19,6 +22,6 @@ public interface ProjectService {
 
       void addRow(Integer pId, Resource resource);
 
-
+      Project getProjectByPid(Integer pid);
 
 }

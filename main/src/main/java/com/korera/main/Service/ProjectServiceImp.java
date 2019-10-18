@@ -1,28 +1,31 @@
-package Service;
+package com.korera.main.Service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-import DAO.ProjectDAO;
-import DTO.ProjectDTO;
-import Entity.Resource;
+import com.korera.main.DAO.ProjectDAO;
+import com.korera.main.DTO.ProjectDTO;
+import com.korera.main.Entity.Project;
+import com.korera.main.Entity.Resource;
 
+@Service
 public class ProjectServiceImp implements ProjectService {
 	
 	@Autowired
 	private ProjectDAO projectDao;
 	
-	@Autowired
-	private ProjectResourceDAO projectResourceDao;
-	
-	@Autowired
-	private ProjectUserDAO projectUserDao;
-	
-	@Autowired
-	private ResourceDAO resourceDao;
+//	@Autowired
+//	private ProjectResourceDAO projectResourceDao;
+//	
+//	@Autowired
+//	private ProjectUserDAO projectUserDao;
+//	
+//	@Autowired
+//	private ResourceDAO resourceDao;
 	
 	@Override
 	public ProjectDTO getDefaultProjectByUserID(Integer userId) {
@@ -59,6 +62,11 @@ public class ProjectServiceImp implements ProjectService {
 	public void addRow(Integer pId, Resource resource) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public Project getProjectByPid(Integer pid) {
+		return projectDao.getOne(pid);
 	}
 
 }
