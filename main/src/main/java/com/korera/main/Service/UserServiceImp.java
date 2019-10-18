@@ -1,10 +1,10 @@
-package Service;
+package com.korera.main.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import Entity.User;
-import DAO.UserDAO;
+import com.korera.main.DAO.UserDAO;
+import com.korera.main.Entity.User;
 
 @Service
 public class UserServiceImp implements UserService{
@@ -14,7 +14,7 @@ public class UserServiceImp implements UserService{
 	
 	@Override
 	public User getUserByCredentials(String username, String password) {
-		User user = userDao.findByUserName(username);
+		User user = userDao.findByUsername(username);
 		if(user != null && password.equals(user.getPassword())) {
 			return user;
 		}
@@ -26,7 +26,7 @@ public class UserServiceImp implements UserService{
 	public User createUser(User user) {
 		
 		//First check if username already exists
-		User createUser = userDao.findByUserName(user.getUsername());
+		User createUser = userDao.findByUsername(user.getUsername());
 		if(createUser != null) {
 			//User already exists
 			System.out.println("User with username " + user.getUsername()

@@ -1,7 +1,7 @@
-package DTO;
+package com.korera.main.DTO;
 
 
-import Entity.Resource;
+import com.korera.main.Entity.Resource;
 
 import java.util.List;
 
