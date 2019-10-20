@@ -1,5 +1,8 @@
 package com.korera.main.Service;
 
-public class ProjectResourceService {
+import com.korera.main.Entity.ProjectResource;
+import java.util.List;
 
+public interface ProjectResourceService {
+	List<ProjectResource> getAllProjectResource(Integer pid);
 }
