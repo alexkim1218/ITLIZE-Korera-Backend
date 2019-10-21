@@ -55,6 +55,10 @@ public class Project implements java.io.Serializable {
 	public Integer getProjectId() {
 		return this.projectId;
 	}
+	
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
 
 	@Column(name = "projectName", nullable = false, length = 256)
 	public String getProjectName() {
