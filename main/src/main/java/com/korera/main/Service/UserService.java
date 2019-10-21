@@ -1,7 +1,9 @@
 package com.korera.main.Service;
 
-import com.korera.main.Entity.User;
+import org.springframework.stereotype.Service;
 
+import com.korera.main.Entity.User;
+@Service
 public interface UserService {
     User getUserByCredentials(String username, String password);
 

@@ -1,10 +1,13 @@
-package com.korera.main.Service;
+package com.korera.main.Service.Impl;
+
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.korera.main.DAO.UserDAO;
 import com.korera.main.Entity.User;
+import com.korera.main.Service.UserService;
 
 @Service
 public class UserServiceImp implements UserService{
@@ -34,7 +37,7 @@ public class UserServiceImp implements UserService{
 			return null;
 		}
 		
-		User createdUser = userDao.save(user);
+		User createdUser = userDao.saveAndFlush(user);
 		System.out.println("User created successfully!");
 		return createdUser;
 	}

@@ -1,6 +1,7 @@
 package com.korera.main.Controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import com.korera.main.DAO.ProjectResourceDAO;
 import com.korera.main.DAO.ResourceDAO;
 import com.korera.main.Entity.Project;
 import com.korera.main.Entity.Resource;
+import com.korera.main.Entity.User;
 //import com.korera.main.Entity.Project;
 import com.korera.main.Service.ProjectService;
 import com.korera.main.Service.ResourceService;
+import com.korera.main.Service.UserService;
 
 
 @RestController
@@ -25,6 +28,9 @@ public class ProjectController {
 	@Autowired
 	private ProjectResourceDAO resDao;
 	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping("/project")
 	public Project callProject() {
 //		User u = new User("chbernar", "asdf1234", "Christhoper", "Bernard", "Programmer");
@@ -35,4 +41,12 @@ public class ProjectController {
 		return p;
 //		return "project called";
 	}
+	
+	@RequestMapping("/createuser")
+	public void createUser() {
+		User user = new User("johnRanklin", "password123", "John", "Ranklin", new Date());
+		userService.createUser(user);
+	}
+	
+	
 }
