@@ -13,7 +13,7 @@ import com.korera.main.Service.ResourceService;
 public class ResourceServiceImp implements ResourceService {
 	
 	@Autowired
-	ResourceDAO resourceDAO;
+	private ResourceDAO resourceDAO;
 	
 	@Override
 	public List<Resource> getAllResources() {
@@ -24,13 +24,13 @@ public class ResourceServiceImp implements ResourceService {
 	@Override
 	public void editResourceByRid(int rid, Resource resource) {
 		// TODO Auto-generated method stub
-		if(resourceDAO.findById(rid).isEmpty()) {
+		if(resourceDAO.getOne(rid) == null) {
 			System.out.println("Resource with ID:" + rid + " not found.");
 			return;
 		}
 		resource.setResourceId(rid);
 		resourceDAO.save(resource);
-		System.out.println("Resourse with ID:" + rid + " updated.");
+		System.out.println("Resource with ID:" + rid + " updated.");
 	}
 
 }
