@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -37,14 +38,14 @@ public class ProjectController {
 	@Autowired 
 	private ProjectService projectService;
 	
-	@Autowired
-	private ProjectResourceDAO resDao;
-	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private ProjectUserService projectUserService;
+//	@Autowired
+//	private ProjectResourceDAO resDao;
+//	
+//	@Autowired
+//	private UserService userService;
+//	
+//	@Autowired
+//	private ProjectUserService projectUserService;
 	
 	@GetMapping("/getDefaultProject/{uid}")
 	public ProjectDTO getDefaultProject(@PathVariable("uid") Integer uid) {
@@ -80,18 +81,28 @@ public class ProjectController {
 	}
 	
 	@DeleteMapping("/resetProjectResource/{pid}")
-	public void resetProjectResource() {
-//		TODO
+	public void resetProjectResource(@PathVariable("pid") Integer pid) {
+		projectService.setResouresbyPid(pid, new ArrayList<>());
 	}
 	
 	@PostMapping("/addField")
-	public void addField(@RequestBody String fieldName) {
+	public void addField(@RequestBody String fieldJson) {
 //		TODO
+//		JSONObject jsonObj = new JSONObject(fieldJson);
+//		Integer pid = fieldJson.getInteger("pid");
+//		private String resourceName = fieldJson.getString("resourceName");
+//		private int resourceCode = fieldJson.getString("resourceCode");
+//		private String extraColsVal = fieldJson.getString("extraColsVal");
 	}
 	
 	@DeleteMapping("/deleteField")
-	public void removeField(@RequestParam String fieldName) {
-//		TODO
+	public void removeField(@RequestParam String fieldJson) {
+//		JSONObject jsonObj = new JSONObject(fieldJson);
+//		Integer pid = fieldJson.getInteger("pid");
+//		private Integer resourceId = fieldJson.getInteger("resourceId");
+//		private String resourceName = fieldJson.getString("resourceName");
+//		private int resourceCode = fieldJson.getString("resourceCode");
+//		private String extraColsVal = fieldJson.getString("extraColsVal");
 	}
 	
 	
