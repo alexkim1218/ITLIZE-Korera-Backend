@@ -21,3 +21,6 @@ logging:
          hibernate:
             SQL: DEBUG
             type: TRACE
+            
+jwt:
+   secret: mysecret
