@@ -3,6 +3,7 @@ package com.korera.main.Service.Impl;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.korera.main.DAO.UserDAO;
@@ -15,12 +16,20 @@ public class UserServiceImp implements UserService{
 	@Autowired
 	private UserDAO userDao;
 	
+	@Autowired
+    private PasswordEncoder bcryptEncoder;
+	
 	@Override
 	public User getUserByCredentials(String username, String password) {
 		User user = userDao.findByUsername(username);
-		if(user != null && password.equals(user.getPassword())) {
+		
+		if(user != null && bcryptEncoder.matches(password, user.getPassword())) {
 			return user;
 		}
+		
+		//if(user != null && password.equals(user.getPassword())) {
+		//	return user;
+		//}
 		
 		return null;
 	}
