@@ -3,6 +3,7 @@ package com.korera.main.Controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+    private PasswordEncoder bcryptEncoder;
+	
 	@PostMapping("createUser")
 	public Boolean createUser(@RequestBody String json) {
 		/*
@@ -34,7 +38,10 @@ public class UserController {
 		String firstName = jsonObj.getString("firstName");
 		String lastName = jsonObj.getString("lastName");
 		String title = jsonObj.getString("title");
-		User user = new User(username, password, firstName, lastName, title, new Date());
+		
+		//Hash the password with bcrypt
+		String hashedPassword = bcryptEncoder.encode(password);
+		User user = new User(username, hashedPassword, firstName, lastName, title, new Date());
 		User created = userService.createUser(user);
 		return (created != null) ? true : false;
 	}
@@ -62,6 +69,7 @@ public class UserController {
 		 * Accepts a string username and password, and returns the user object. If either parameter
 		 * is invalid, returns null.
 		 */
+		
 		return userService.getUserByCredentials(username, password);
 	}
 }
