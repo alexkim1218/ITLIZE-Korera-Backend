@@ -20,16 +20,17 @@ public class UserServiceImp implements UserService{
     private PasswordEncoder bcryptEncoder;
 	
 	@Override
+	public User getUserByUsername(String username) {
+		return userDao.findByUsername(username);
+	}
+	
+	@Override
 	public User getUserByCredentials(String username, String password) {
 		User user = userDao.findByUsername(username);
 		
 		if(user != null && bcryptEncoder.matches(password, user.getPassword())) {
 			return user;
 		}
-		
-		//if(user != null && password.equals(user.getPassword())) {
-		//	return user;
-		//}
 		
 		return null;
 	}

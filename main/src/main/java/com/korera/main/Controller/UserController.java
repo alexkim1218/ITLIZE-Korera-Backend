@@ -3,16 +3,22 @@ package com.korera.main.Controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.json.*;
 
+import com.korera.main.Config.JwtTokenUtil;
 import com.korera.main.Entity.User;
+import com.korera.main.Model.JwtRequest;
+import com.korera.main.Service.JwtUserDetailsService;
 import com.korera.main.Service.UserService;
 
 @RestController
@@ -24,6 +30,13 @@ public class UserController {
 	
 	@Autowired
     private PasswordEncoder bcryptEncoder;
+	
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+	@Autowired
+	private JwtUserDetailsService userDetailsService;
 	
 	@PostMapping("createUser")
 	public Boolean createUser(@RequestBody String json) {
@@ -46,30 +59,52 @@ public class UserController {
 		return (created != null) ? true : false;
 	}
 	
-	@GetMapping("login")
-	public String login(@RequestParam String username, @RequestParam String password) {
+	@PostMapping("login")
+	public String login(@RequestBody JwtRequest jwtReq) {
 		/*
 		 * Accepts a string username and password, and returns a temporary
 		 * JWT authentication token as a string
 		 */
 		
-		User user = userService.getUserByCredentials(username, password);
+		User user = userService.getUserByCredentials(jwtReq.getUsername(), jwtReq.getPassword());
+		
 		if(user == null) {
 			return "failed";
 		}
 		else {
-			//TODO: Update this to return a JWT token for the given user;
-			return "validtoken";
+			
+			final UserDetails userDetails = userDetailsService
+					.loadUserByUsername(jwtReq.getUsername());
+			
+			final String token = jwtTokenUtil.generateToken(userDetails);
+			
+			return token;
 		}
 	}
 	
+//	@GetMapping("getUser")
+//	public User getUser(@RequestParam String username, @RequestParam String password) {
+//		/*
+//		 * Accepts a string username and password, and returns the user object. If either parameter
+//		 * is invalid, returns null.
+//		 */
+//		
+//		return userService.getUserByCredentials(username, password);
+//	}
 	@GetMapping("getUser")
-	public User getUser(@RequestParam String username, @RequestParam String password) {
-		/*
-		 * Accepts a string username and password, and returns the user object. If either parameter
-		 * is invalid, returns null.
-		 */
+	public User getUser(@RequestHeader("Authorization") String auth) {
 		
-		return userService.getUserByCredentials(username, password);
+		//find user from the token
+		if(auth.startsWith("Bearer ")) {
+			String jwtToken = auth.substring(7);
+			
+			String username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+			return userService.getUserByUsername(username);
+			
+			
+			
+		}
+		
+		return null;
 	}
 }
