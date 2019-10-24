@@ -25,6 +25,10 @@ public class ProjectResource implements java.io.Serializable{
 	@Column(name = "rid")
 	private Integer rid;
 	
+	public ProjectResource() {
+		
+	}
+	
 	public ProjectResource(Integer pid, Integer rid) {
 		this.pid = pid;
 		this.rid = rid;

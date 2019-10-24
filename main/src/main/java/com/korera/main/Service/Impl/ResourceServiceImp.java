@@ -32,5 +32,15 @@ public class ResourceServiceImp implements ResourceService {
 		resourceDAO.save(resource);
 		System.out.println("Resource with ID:" + rid + " updated.");
 	}
+	
+	@Override
+	public Resource getResourceById(int rid) {
+		return resourceDAO.getOne(rid);
+	}
+
+	@Override
+	public Resource addResource(Resource resource) {
+		return resourceDAO.save(resource);
+	}
 
 }
