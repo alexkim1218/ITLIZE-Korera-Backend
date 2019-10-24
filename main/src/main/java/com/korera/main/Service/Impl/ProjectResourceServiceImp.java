@@ -5,7 +5,9 @@ import com.korera.main.Entity.ProjectResource;
 import com.korera.main.Service.ProjectResourceService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProjectResourceServiceImp implements ProjectResourceService {
 
 	@Autowired
