@@ -1,6 +1,9 @@
 package com.korera.main.Controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.korera.main.DAO.ProjectResourceDAO;
 import com.korera.main.DTO.ProjectDTO;
+import com.korera.main.Entity.Project;
+import com.korera.main.Entity.ProjectResource;
+import com.korera.main.Entity.ProjectUser;
 import com.korera.main.Entity.Resource;
 import com.korera.main.Service.ProjectResourceService;
 import com.korera.main.Service.ProjectService;
@@ -46,43 +52,62 @@ public class ProjectController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/getDefaultProject/{uid}")
+	@GetMapping(path = "/getDefaultProject/{uid}")
 	public ProjectDTO getDefaultProject(@PathVariable("uid") Integer uid) {
 		ProjectDTO defaultProject = projectService.getDefaultProjectByUserID(uid);
 		return defaultProject;
 	}
 
-	@GetMapping("/getUserProjects/{uid}")
-	public Page<ProjectDTO> getUserProjects(@PathVariable("uid") Integer uid) {
-		Page<ProjectDTO> projects = projectService.getProjectsByUid(uid, null);
-		return projects;
+	@GetMapping(path = "/getUserProjects/{uid}")
+	public List<Project> getUserProjects(@PathVariable("uid") Integer uid) {
+		List<ProjectUser> projectUserList = projectUserService.getAllProjectUser(uid);
+        List<Project> projectList = new ArrayList<>();
+        
+        for (int i = 0; i <projectUserList.size(); i++) {
+            ProjectUser projectUser = projectUserList.get(i);
+            Integer pid = projectUser.getPid();
+            Project project = projectService.getProjectByPid(pid);
+            projectList.add(project);
+        }
+        
+        return  projectList;
 	}
 
-	@GetMapping("/getProjectResources/{pid}")
-	public Page<Resource> getProjectResources(@PathVariable("pid") Integer pid) {
-		Page<Resource> resources = projectService.getResourcesbyPid(pid, null);
-		return resources;
+	@GetMapping(path = "/getProjectResources/{pid}")
+	public Set<Resource> getProjectResources(@PathVariable("pid") Integer pid) {
+		
+		List<ProjectResource> projectResourceList = projectResourceService.getAllProjectResource(pid);
+        Set<Resource> resourceSet = new HashSet<>();
+        
+        for (int i = 0; i <projectResourceList.size(); i++) {
+            ProjectResource projectResource = projectResourceList.get(i);
+            Integer rid = projectResource.getRid();
+            Resource resource = resourceService.getResourceById(rid);
+            resourceSet.add(resource);
+        }
+        
+        return resourceSet;
 	}
 
-	@PostMapping("/addProjectResource/{pid}")
+	@PostMapping(path = "/addProjectResource/{pid}")
 	public void addProjectResource(@RequestBody String resourceJson, @PathVariable("pid") Integer pid) {
 		JSONObject resourceObj = new JSONObject(resourceJson);
 		resourceObj.put(resourceJson, pid);
 	}
 
-	@PutMapping("/editProjectResource/{pid}")
+	@PutMapping(path = "/editProjectResource/{pid}")
 	public void editProjectResource(@RequestBody String resourceJson, @PathVariable("pid") Integer pid) {
 		JSONObject resourceObj = new JSONObject(resourceJson);
 		resourceObj.remove(resourceJson);
 		resourceObj.put(resourceJson, pid);
 	}
 
-	@DeleteMapping("/resetProjectResource/{pid}")
+	@DeleteMapping(path = "/resetProjectResource/{pid}")
 	public void resetProjectResource(@PathVariable("pid") Integer pid) {
 		projectService.setResouresbyPid(pid, new ArrayList<>());
 	}
 
-	@PostMapping("/addField")
+	@PostMapping(path = "/addField")
 	public void addField(@RequestBody String fieldJson) {
 		JSONObject fieldObj = new JSONObject(fieldJson);
 		Integer pid = fieldObj.getInt("pid");
@@ -94,14 +119,8 @@ public class ProjectController {
 		projectService.addRow(pid, r);
 	}
 
-	@DeleteMapping("/deleteField")
+	@DeleteMapping(path = "/deleteAllResource")
 	public void removeField(@RequestParam String fieldJson) {
-		JSONObject fieldObj = new JSONObject(fieldJson);
-		Integer pid = fieldObj.getInt("pid");
-		Integer resourceId = fieldObj.getInt("resourceId");
-		String resourceName = fieldObj.getString("resourceName");
-		Integer resourceCode = fieldObj.getInt("resourceCode");
-		String extraColsVal = fieldObj.getString("extraColsVal");
-		//TODO: No Service for this yet
+		resourceService.deleteAllResource();
 	}
 }
