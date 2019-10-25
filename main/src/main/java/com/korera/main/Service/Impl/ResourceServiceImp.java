@@ -42,5 +42,16 @@ public class ResourceServiceImp implements ResourceService {
 	public Resource addResource(Resource resource) {
 		return resourceDAO.save(resource);
 	}
+	
+	@Override
+	public void deleteResource(Resource resource) {
+		resourceDAO.delete(resource);
+	}
+	
+	@Override
+    public void deleteAllResource() {
+		resourceDAO.deleteAll();
+	}
+	
 
 }
