@@ -89,6 +89,9 @@ public class ProjectController {
 		String resourceName = fieldObj.getString("resourceName");
 		Integer resourceCode = fieldObj.getInt("resourceCode");
 		String extraColsVal = fieldObj.getString("extraColsVal");
+		Resource r = new Resource(resourceName, resourceCode, extraColsVal);
+
+		projectService.addRow(pid, r);
 	}
 
 	@DeleteMapping("/deleteField")
@@ -99,5 +102,6 @@ public class ProjectController {
 		String resourceName = fieldObj.getString("resourceName");
 		Integer resourceCode = fieldObj.getInt("resourceCode");
 		String extraColsVal = fieldObj.getString("extraColsVal");
+		//TODO: No Service for this yet
 	}
 }
