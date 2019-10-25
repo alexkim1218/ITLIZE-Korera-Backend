@@ -14,6 +14,14 @@ public class ProjectResourceServiceImp implements ProjectResourceService {
 	private ProjectResourceDAO projectResourceDao;
 
 	@Override
+	public void deleteAllProjectResourceByPid(Integer pid) {
+		List<ProjectResource> projectResourceList = getAllProjectResource(pid);
+		if(projectResourceList != null){
+			projectResourceDao.deleteAll(projectResourceList);
+		}
+	}
+
+	@Override
 	public List<ProjectResource> getAllProjectResource(Integer pid) {
 		List<ProjectResource> projectResource = projectResourceDao.findByPid(pid);
 

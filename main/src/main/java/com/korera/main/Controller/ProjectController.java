@@ -48,7 +48,7 @@ public class ProjectController {
 
 	@GetMapping(path = "/getDefaultProject/{uid}")
 	public ProjectDTO getDefaultProject(@PathVariable("uid") Integer uid) {
-		ProjectDTO defaultProject = projectService.getDefaultProjectByUserID(uid);
+		ProjectDTO defaultProject = projectService.getDefaultProject(uid);
 		return defaultProject;
 	}
 
@@ -120,7 +120,7 @@ public class ProjectController {
 
 	@DeleteMapping(path = "/resetProjectResource/{pid}")
 	public void resetProjectResource(@PathVariable("pid") Integer pid) {
-		projectService.setResouresbyPid(pid, new ArrayList<>());
+		projectResourceService.deleteAllProjectResourceByPid(pid);
 	}
 
 	@PostMapping(path = "/addField")
