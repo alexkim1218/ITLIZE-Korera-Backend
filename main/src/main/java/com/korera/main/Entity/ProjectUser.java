@@ -24,6 +24,10 @@ public class ProjectUser {
 	@Column(name = "uid")
 	private Integer uid;
 	
+	public ProjectUser() {
+		
+	}
+	
 	public ProjectUser(Integer pid, Integer uid) {
 		this.pid = pid;
 		this.uid = uid;

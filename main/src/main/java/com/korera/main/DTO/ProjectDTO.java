@@ -3,9 +3,10 @@ package com.korera.main.DTO;
 
 import com.korera.main.Entity.Resource;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ProjectDTO {
+public class ProjectDTO implements Serializable{
 
 
     public class Project {
@@ -16,7 +17,7 @@ public class ProjectDTO {
 
         private String projectName;
 
-        List<Resource> projectResourceList;
+        //List<Resource> projectResourceList;
 
 
         public int getProjectID() {
@@ -35,13 +36,13 @@ public class ProjectDTO {
             this.projectName = projectName;
         }
 
-        public List<Resource> getProjectResourceList() {
+        /*public List<Resource> getProjectResourceList() {
             return projectResourceList;
         }
 
         public void setProjectResourceList(List<Resource> projectResourceList) {
             this.projectResourceList = projectResourceList;
-        }
+        }*/
 
 
     }
