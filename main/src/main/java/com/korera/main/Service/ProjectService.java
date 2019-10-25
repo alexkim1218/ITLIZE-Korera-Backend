@@ -11,17 +11,16 @@ import java.util.List;
 
 @Service
 public interface ProjectService {
-      ProjectDTO getDefaultProjectByUserID(Integer userId);
+      ProjectDTO getDefaultProject(Integer uid);
 
-      Page<Resource> getResourcesbyPid(Integer pid, Pageable pageable);
-      void setResouresbyPid(Integer pid, List<Resource> listResource );
+      Project getProjectByPid(Integer pid);
 
-      Page<ProjectDTO> getProjectsByUid(Integer uId,Pageable pageable);
+      List<ProjectDTO> getProjectlistByUid(Integer uid);
+
+
 
       void addColumn (Integer pId, String colName, String colType);
 
       void addRow(Integer pId, Resource resource);
-
-      Project getProjectByPid(Integer pid);
 
 }
