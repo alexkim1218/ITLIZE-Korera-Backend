@@ -46,12 +46,6 @@ public class ProjectController {
 	@Autowired
 	private ProjectUserService projectUserService;
 
-	@Autowired
-	private ProjectResourceDAO resDao;
-
-	@Autowired
-	private UserService userService;
-
 	@GetMapping(path = "/getDefaultProject/{uid}")
 	public ProjectDTO getDefaultProject(@PathVariable("uid") Integer uid) {
 		ProjectDTO defaultProject = projectService.getDefaultProjectByUserID(uid);
@@ -122,5 +116,13 @@ public class ProjectController {
 	@DeleteMapping(path = "/deleteAllResource")
 	public void removeField(@RequestParam String fieldJson) {
 		resourceService.deleteAllResource();
+	}
+	
+	@PostMapping(path = "/addColumn/{pid}")
+	public void addColumn(@RequestBody String colJson, @PathVariable("pid") Integer pid) {
+		JSONObject colObj = new JSONObject(colJson);
+		String colName = colObj.getString("colName");
+		String colType = colObj.getString("colType");
+		projectService.addColumn(pid, colName, colType);
 	}
 }
