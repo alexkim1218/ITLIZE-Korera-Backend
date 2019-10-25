@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProjectResourceService {
 	List<ProjectResource> getAllProjectResource(Integer pid);
+	ProjectResource addProjectResource(Integer pid, Integer rid);
 }

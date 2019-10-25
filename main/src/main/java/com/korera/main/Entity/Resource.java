@@ -39,6 +39,13 @@ public class Resource implements java.io.Serializable {
 		this.extraColsVal = extraColsVal;
 	}
 
+	public Resource(Integer resourceId, String resourceName, int resourceCode, String extraColsVal) {
+		this.resourceId = resourceId;
+		this.resourceName = resourceName;
+		this.resourceCode = resourceCode;
+		this.extraColsVal = extraColsVal;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 

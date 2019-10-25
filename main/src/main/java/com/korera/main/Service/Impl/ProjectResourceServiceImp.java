@@ -22,4 +22,10 @@ public class ProjectResourceServiceImp implements ProjectResourceService {
 		}
 		return null;
 	}
+
+	@Override
+	public ProjectResource addProjectResource(Integer pid, Integer rid){
+		ProjectResource projectResource = new ProjectResource(pid, rid);
+		return projectResourceDao.save(projectResource);
+	}
 }
