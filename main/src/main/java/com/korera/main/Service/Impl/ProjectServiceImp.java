@@ -54,14 +54,13 @@ public class ProjectServiceImp implements ProjectService {
 
 		for (int i = 0; i <projectUserList.size(); i++) {
 
-
+			
 			ProjectUser projectUser = projectUserList.get(i);
 			Integer pid = projectUser.getPid();
 			Project project = getProjectByPid(pid);
 			ProjectDTO projectDTO = new ProjectDTO();
+	
 			BeanUtils.copyProperties(project,projectDTO);
-
-
 			projectList.add(projectDTO);
 		}
 
