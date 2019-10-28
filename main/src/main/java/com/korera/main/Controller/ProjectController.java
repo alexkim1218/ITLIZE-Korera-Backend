@@ -83,15 +83,9 @@ public class ProjectController {
         return resourceSet;
 	}
 
-	@PostMapping(path = "/addProjectResource/{pid}")
-	public void addProjectResource(@RequestBody String resourceJson, @PathVariable("pid") Integer pid) {
-		JSONObject resourceObj = new JSONObject(resourceJson);
-
-		Integer rid = resourceObj.getInt("rid");
+	@PostMapping(path = "/addProjectResource/{pid}/{rid}")
+	public void addProjectResource(@PathVariable("rid") Integer rid, @PathVariable("pid") Integer pid) {
 		projectResourceService.addProjectResource(pid,rid);
-
-
-
 	}
 
 	@PutMapping(path = "/editProjectResource/{pid}")
