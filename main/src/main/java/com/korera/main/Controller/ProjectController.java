@@ -88,11 +88,6 @@ public class ProjectController {
 		JSONObject resourceObj = new JSONObject(resourceJson);
 
 		Integer rid = resourceObj.getInt("rid");
-		String resourceName = resourceObj.getString("resourceName");
-		Integer resourceCode = resourceObj.getInt("resourceCode");
-		String extraColsVal = resourceObj.getString("extraColsVal");
-
-
 		projectResourceService.addProjectResource(pid,rid);
 
 
@@ -109,7 +104,7 @@ public class ProjectController {
 		String extraColsVal = resourceObj.getString("extraColsVal");
 		Resource r = new Resource(rid, resourceName, resourceCode, extraColsVal);
 		Set<Resource> resourceSet = getProjectResources(pid);
-		if(resourceSet.contains(resourceObj)){
+		if(resourceSet.contains(r)){
 			resourceService.editResourceByRid(rid,r);
 		} else
 		{
