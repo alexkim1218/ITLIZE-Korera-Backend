@@ -83,39 +83,22 @@ public class ProjectController {
         return resourceSet;
 	}
 
-	@PostMapping(path = "/addProjectResource/{pid}")
-	public void addProjectResource(@RequestBody String resourceJson, @PathVariable("pid") Integer pid) {
-		JSONObject resourceObj = new JSONObject(resourceJson);
-
-		Integer rid = resourceObj.getInt("rid");
-		String resourceName = resourceObj.getString("resourceName");
-		Integer resourceCode = resourceObj.getInt("resourceCode");
-		String extraColsVal = resourceObj.getString("extraColsVal");
-
-
+	@PostMapping(path = "/addProjectResource/{pid}/{rid}")
+	public void addProjectResource(@PathVariable("rid") Integer rid, @PathVariable("pid") Integer pid) {
 		projectResourceService.addProjectResource(pid,rid);
-
-
-
 	}
 
 	@PutMapping(path = "/editProjectResource/{pid}")
 	public void editProjectResource(@RequestBody String resourceJson, @PathVariable("pid") Integer pid) throws Exception {
 		JSONObject resourceObj = new JSONObject(resourceJson);
 
-		Integer rid = resourceObj.getInt("rid");
+		Integer rid = resourceObj.getInt("resourceId");
 		String resourceName = resourceObj.getString("resourceName");
 		Integer resourceCode = resourceObj.getInt("resourceCode");
 		String extraColsVal = resourceObj.getString("extraColsVal");
 		Resource r = new Resource(rid, resourceName, resourceCode, extraColsVal);
-		Set<Resource> resourceSet = getProjectResources(pid);
-		if(resourceSet.contains(resourceObj)){
-			resourceService.editResourceByRid(rid,r);
-		} else
-		{
-			throw new Exception("Resource is not exist");
-		}
 
+		resourceService.editResourceByRid(rid,r);
 	}
 
 	@DeleteMapping(path = "/resetProjectResource/{pid}")
@@ -136,7 +119,7 @@ public class ProjectController {
 	}
 
 	@DeleteMapping(path = "/deleteAllResource")
-	public void removeField(@RequestParam String fieldJson) {
+	public void removeField() {
 		resourceService.deleteAllResource();
 	}
 	
