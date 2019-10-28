@@ -117,6 +117,48 @@ public class ProjectServiceImp implements ProjectService {
 
 	}
 	
+	@Override
+	public void deleteColumn(Integer pId, String colName, String colType) {
+		Project p = getProjectByPid(pId);
+		
+		if(p != null) {
+			String currCols = p.getExtraCols();
+			String currColsType = p.getExtraColsType();
+			
+			String[] colsList = currCols.split(",");
+			String[] colsTypeList = currColsType.split(",");
+			
+			int idxFound = -1;
+			for(int i = 0; i <  colsList.length; i++) {
+				if(colsList[i].equals(colName) && colsTypeList[i].equals(colType)) {
+					idxFound = i;
+					break;
+				}
+			}
+			
+			String newCols = "";
+			String newColsType = "";
+			
+			for(int i = 0; i <  colsList.length; i++) {
+				if(i != idxFound) {
+					if(newCols.length() == 0) {
+						newCols += colsList[i];
+						newColsType += colsTypeList[i];
+					}
+					else {
+						newCols += "," + colsList[i];
+						newColsType += "," + colsTypeList[i];
+					}
+				}
+			}
+			
+			p.setExtraCols(newCols);
+			p.setExtraColsType(newColsType);
+			projectDAO.saveAndFlush(p);
+				
+			
+		}
+	}
 
 
 }

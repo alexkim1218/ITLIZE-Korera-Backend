@@ -130,4 +130,10 @@ public class ProjectController {
 		String colType = colObj.getString("colType");
 		projectService.addColumn(pid, colName, colType);
 	}
+	
+	@DeleteMapping(path = "/deleteColumn/{pid}")
+	public void deleteColumn(@RequestParam String colName, 
+			@RequestParam String colType, @PathVariable("pid") Integer pid) {
+		projectService.deleteColumn(pid, colName, colType);
+	}
 }
