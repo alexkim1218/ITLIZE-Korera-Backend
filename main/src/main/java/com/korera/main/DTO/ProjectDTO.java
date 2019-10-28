@@ -8,24 +8,17 @@ import java.util.List;
 
 public class ProjectDTO implements Serializable{
 
-
-    public class Project {
-
-
-        private int projectID;
-
-
+        private int projectId;
         private String projectName;
 
-        //List<Resource> projectResourceList;
 
-
+        public ProjectDTO() {}
         public int getProjectID() {
-            return projectID;
+            return projectId;
         }
 
-        public void setProjectID(int projectID) {
-            this.projectID = projectID;
+        public void setProjectId(int projectID) {
+            this.projectId = projectID;
         }
 
         public String getProjectName() {
@@ -35,16 +28,5 @@ public class ProjectDTO implements Serializable{
         public void setProjectName(String projectName) {
             this.projectName = projectName;
         }
-
-        /*public List<Resource> getProjectResourceList() {
-            return projectResourceList;
-        }
-
-        public void setProjectResourceList(List<Resource> projectResourceList) {
-            this.projectResourceList = projectResourceList;
-        }*/
-
-
-    }
 
 }
