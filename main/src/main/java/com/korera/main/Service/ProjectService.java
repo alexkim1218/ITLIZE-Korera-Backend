@@ -20,7 +20,7 @@ public interface ProjectService {
 
 
       void addColumn (Integer pId, String colName, String colType);
-
+      void deleteColumn(Integer pId, String colName, String colType);
       void addRow(Integer pId, Resource resource);
 
 }
