@@ -92,19 +92,13 @@ public class ProjectController {
 	public void editProjectResource(@RequestBody String resourceJson, @PathVariable("pid") Integer pid) throws Exception {
 		JSONObject resourceObj = new JSONObject(resourceJson);
 
-		Integer rid = resourceObj.getInt("rid");
+		Integer rid = resourceObj.getInt("resourceId");
 		String resourceName = resourceObj.getString("resourceName");
 		Integer resourceCode = resourceObj.getInt("resourceCode");
 		String extraColsVal = resourceObj.getString("extraColsVal");
 		Resource r = new Resource(rid, resourceName, resourceCode, extraColsVal);
-		Set<Resource> resourceSet = getProjectResources(pid);
-		if(resourceSet.contains(r)){
-			resourceService.editResourceByRid(rid,r);
-		} else
-		{
-			throw new Exception("Resource is not exist");
-		}
 
+		resourceService.editResourceByRid(rid,r);
 	}
 
 	@DeleteMapping(path = "/resetProjectResource/{pid}")
@@ -125,7 +119,7 @@ public class ProjectController {
 	}
 
 	@DeleteMapping(path = "/deleteAllResource")
-	public void removeField(@RequestParam String fieldJson) {
+	public void removeField() {
 		resourceService.deleteAllResource();
 	}
 	

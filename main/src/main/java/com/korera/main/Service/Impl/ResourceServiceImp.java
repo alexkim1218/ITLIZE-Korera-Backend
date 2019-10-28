@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.korera.main.DAO.ProjectResourceDAO;
 import com.korera.main.DAO.ResourceDAO;
 import com.korera.main.Entity.Resource;
 import com.korera.main.Service.ResourceService;
@@ -14,6 +15,9 @@ public class ResourceServiceImp implements ResourceService {
 	
 	@Autowired
 	private ResourceDAO resourceDAO;
+	
+	@Autowired
+	private ProjectResourceDAO projectResourceDAO;
 	
 	@Override
 	public List<Resource> getAllResources() {
@@ -50,6 +54,10 @@ public class ResourceServiceImp implements ResourceService {
 	
 	@Override
     public void deleteAllResource() {
+		//remove all constraints
+		projectResourceDAO.deleteAll();
+		
+		//clear resource table
 		resourceDAO.deleteAll();
 	}
 	
