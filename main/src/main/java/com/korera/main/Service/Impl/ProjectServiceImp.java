@@ -24,8 +24,6 @@ import com.korera.main.Service.ProjectService;
 public class ProjectServiceImp implements ProjectService {
 
 
-
-
 	@Autowired
 	ProjectDAO projectDAO;
 
@@ -52,25 +50,21 @@ public class ProjectServiceImp implements ProjectService {
 		List<ProjectUser> projectUserList = projectUserDAO.findByUid(uid);
 		List<ProjectDTO> projectList = new ArrayList<>();
 
-		for (int i = 0; i <projectUserList.size(); i++) {
+		for (int i = 0; i < projectUserList.size(); i++) {
 
 
 			ProjectUser projectUser = projectUserList.get(i);
 			Integer pid = projectUser.getPid();
 			Project project = getProjectByPid(pid);
 			ProjectDTO projectDTO = new ProjectDTO();
-			BeanUtils.copyProperties(project,projectDTO);
+			BeanUtils.copyProperties(project, projectDTO);
 
 
 			projectList.add(projectDTO);
 		}
 
 
-
-
-
-
-		return  projectList;
+		return projectList;
 	}
 
 	@Override
@@ -83,7 +77,7 @@ public class ProjectServiceImp implements ProjectService {
 	public void addRow(Integer pId, Resource resource) {
 		//add resource in the database
 		resourceDAO.saveAndFlush(resource);
-		
+
 		//add ProjectResource with the newly created resource
 		ProjectResource pr = new ProjectResource(pId, resource.getResourceId());
 		projectResourceDAO.saveAndFlush(pr);
@@ -100,13 +94,14 @@ public class ProjectServiceImp implements ProjectService {
 		String currColsType = p.getExtraColsType();
 
 		boolean emptyExtraCols = false;
-		if(currCols.length() == 0) {emptyExtraCols = true;}
+		if (currCols.length() == 0) {
+			emptyExtraCols = true;
+		}
 
-		if(emptyExtraCols) {
+		if (emptyExtraCols) {
 			currCols = colName;
 			currColsType = colType;
-		}
-		else {
+		} else {
 			currCols += "," + colName;
 			currColsType += "," + colType;
 		}
@@ -114,10 +109,5 @@ public class ProjectServiceImp implements ProjectService {
 		//update project database here
 		p.setExtraCols(currCols);
 		p.setExtraColsType(currColsType);
-		projectDAO.saveAndFlush(p);
-
 	}
-	
-
-
 }

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public interface ProjectService {
@@ -15,7 +16,7 @@ public interface ProjectService {
 
       Project getProjectByPid(Integer pid);
 
-      List<ProjectDTO> getProjectlistByUid(Integer uid);
+      public List<ProjectDTO> getProjectlistByUid(Integer uid);
 
 
 

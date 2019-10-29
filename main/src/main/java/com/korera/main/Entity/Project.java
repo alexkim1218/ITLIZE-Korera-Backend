@@ -26,6 +26,7 @@ public class Project implements java.io.Serializable {
 
 	private Integer projectId;
 	private String projectName;
+
 	private String extraCols;
 	private String extraColsType;
 	

@@ -1,30 +1,36 @@
 package com.korera.main.DTO;
 
 
+import com.korera.main.Entity.Project;
 import com.korera.main.Entity.Resource;
 
 import java.util.List;
+import java.util.Set;
 
 public class ProjectDTO {
 
 
-    public class Project {
 
 
-        private int projectID;
 
+        private Integer projectId;
 
         private String projectName;
 
-        List<Resource> projectResourceList;
+        private List<Project> projectList;
+
+
+
+
+
 
 
         public int getProjectID() {
-            return projectID;
+            return projectId;
         }
 
         public void setProjectID(int projectID) {
-            this.projectID = projectID;
+            this.projectId = projectID;
         }
 
         public String getProjectName() {
@@ -35,15 +41,6 @@ public class ProjectDTO {
             this.projectName = projectName;
         }
 
-        public List<Resource> getProjectResourceList() {
-            return projectResourceList;
-        }
 
-        public void setProjectResourceList(List<Resource> projectResourceList) {
-            this.projectResourceList = projectResourceList;
-        }
-
-
-    }
 
 }
