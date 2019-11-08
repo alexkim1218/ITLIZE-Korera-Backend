@@ -1,0 +1,23 @@
+spring:
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: Asdf1234.
+      url: jdbc:mysql://localhost:3306/KoreraSchema
+   jpa:
+      show-sql: true
+      hibernate:
+         naming:
+            implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+            physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      
+server:
+   servlet:
+      context-path: /Korera
+     
+logging:
+   level:
+      org:
+         hibernate:
+            SQL: DEBUG
+            type: TRACE
